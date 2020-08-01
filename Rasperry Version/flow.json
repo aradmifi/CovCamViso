@@ -1,0 +1,192 @@
+[
+    {
+        "id": "f87d80d4.fc675",
+        "type": "exec",
+        "z": "51bc84bf.c51eec",
+        "command": "sudo raspistill -vf -hf -o /usr/lib/node_modules/node-red/public/campi/imagecaptured.jpg -q 20",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Comando de foto",
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "166dea8a.7f6225"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6bce7303.1e3f8c",
+        "type": "change",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 200,
+        "wires": [
+            [
+                "f87d80d4.fc675"
+            ]
+        ]
+    },
+    {
+        "id": "38fe4b06.7023e4",
+        "type": "trigger",
+        "z": "51bc84bf.c51eec",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "2",
+        "extend": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 780,
+        "y": 240,
+        "wires": [
+            [
+                "64f0552e.9a96ec"
+            ]
+        ]
+    },
+    {
+        "id": "166dea8a.7f6225",
+        "type": "template",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload}} !",
+        "output": "str",
+        "x": 780,
+        "y": 187,
+        "wires": [
+            [
+                "38fe4b06.7023e4"
+            ]
+        ]
+    },
+    {
+        "id": "3f127b86.cadb54",
+        "type": "inject",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "6bce7303.1e3f8c"
+            ]
+        ]
+    },
+    {
+        "id": "64f0552e.9a96ec",
+        "type": "file in",
+        "z": "51bc84bf.c51eec",
+        "name": "imagecaptured.jpg",
+        "filename": "/usr/lib/node_modules/node-red/public/campi/imagecaptured.jpg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 810,
+        "y": 280,
+        "wires": [
+            [
+                "ffeb21f5.0567e",
+                "5c89cf34.2998e"
+            ]
+        ]
+    },
+    {
+        "id": "5c89cf34.2998e",
+        "type": "model",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "path": "/usr/lib/node_modules/node-red/public/modelo",
+        "x": 970,
+        "y": 240,
+        "wires": [
+            [
+                "81ff21f8.bacc7"
+            ]
+        ]
+    },
+    {
+        "id": "ffeb21f5.0567e",
+        "type": "image",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "width": "500",
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 940,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b6815657.aecbf8",
+        "type": "speakerpi-output",
+        "z": "51bc84bf.c51eec",
+        "choose": "filebased",
+        "filename": "",
+        "channels": "1",
+        "bitdepth": "16",
+        "samplerate": "22050",
+        "name": "",
+        "x": 1320,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "81ff21f8.bacc7",
+        "type": "PlaySound",
+        "z": "51bc84bf.c51eec",
+        "name": "",
+        "playerOptions": "{}",
+        "audioURI": "/usr/lib/node_modules/node-red/public/audio/covd.wav",
+        "options": "{}",
+        "x": 1130,
+        "y": 240,
+        "wires": [
+            [
+                "b6815657.aecbf8"
+            ]
+        ]
+    }
+]
